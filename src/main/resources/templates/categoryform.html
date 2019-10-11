@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: header" />
+<body>
+<div th:replace="base :: navlinks" />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-dark display-3 text-center title">Add/Update a Category</h1>
+        <form th:action="@{/processcategory}" th:object="${category}" method="post">
+            <input type="hidden" th:field="*{id}" />
+<!--                            <input type="hidden" th:field="*{postedDate}" />-->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control" id="title" type="text" placeholder="Title" th:field="*{title}" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input class="form-control" id="description" type="text" placeholder="Description" th:field="*{description}" />
+            </div>
+            <input class="btn btn-primary btn-md" type="submit" onclick="confirmation()" value="Save">
+        </form>
+    </div>
+</div>
+<div th:replace="base :: footer" />
+<div th:replace="base :: scripts" />
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: header" />
+<body>
+<div th:replace="base :: navlinks" />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-dark display-3 text-center title">Docs</h1>
+        <p>The 'Magic!' link populate the table with fake jobs, for testing purposes.</p>
+        <p>The search funcionality applies to title and author only. Words separated by spaces are all searched for in both title and author (word1 OR word2 OR ...).</p>
+        <p>Most of the layout is responsive in some extent, including the table.</p>
+        <p>The 'date posted' field is filled automatically with the current date when adding a new job.</p>
+        <p>All the columns in the table truncate with ellipsis in the end, after a max width is reached.</p>
+        <p>There are tooltips over the 'Actions' buttons in the table.</p>
+    </div>
+</div>
+<div th:replace="base :: footer" />
+<div th:replace="base :: scripts" />
+
+</body>
+</html>
