@@ -99,9 +99,16 @@ public class HomeController {
     }
 
     @RequestMapping("/categorydelete/{id}")
-    public String deleteCategory(@PathVariable("id") long id){
-        categoryRepository.deleteById(id);
-        return "redirect:/categories";
+    public String deleteCategory(@PathVariable("id") long id, Model model){
+        try {
+            categoryRepository.deleteById(id);
+            return "redirect:/categories";
+        }
+        catch (Exception e) {
+            model.addAttribute("error_message", "You can't delete this category because there is at least one car registered under it.");
+            model.addAttribute("return_link", "/categories");
+            return "error";
+        }
     }
 
     @RequestMapping("/pickcategory/{chosencategory}")
