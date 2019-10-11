@@ -12,7 +12,7 @@ public class Car {
     private long id;
     private String manufacturer;
     private String model;
-    private int year;
+    private String year;
     private double mSRP;
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="category_id")
@@ -22,7 +22,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(String manufacturer, String model, int year, double mSRP, Category category) {
+    public Car(String manufacturer, String model, String year, double mSRP, Category category) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.year = year;
@@ -54,11 +54,11 @@ public class Car {
         this.model = model;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

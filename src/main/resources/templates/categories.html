@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: header" />
+<body>
+<div th:replace="base :: navlinks" />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-dark display-3 text-center title">DeLorean's Cars</h1>
+        <h2 class="text-dark display-4 text-center title">Category List</h2>
+        <table class="table table-hover text-nowrap table-responsive-xl" th:if="${!categories.isEmpty()}">
+            <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categories}">
+                <td style="max-width: 200px" class="text-truncate" th:text="${category.title}"></td>
+                <td style="max-width: 200px" class="text-truncate" th:text="${category.description}"></td></td>
+                <td>
+<!--                    <a data-toggle="tooltip" title="Details" class="btn btn-info btn-sm" th:href="@{/categorydetail/{id}(id=${category.id})}"><span class="fa fa-eye" aria-hidden="true"></span></a>-->
+                    <a data-toggle="tooltip" title="Update" class="btn btn-primary btn-sm" th:href="@{/categoryupdate/{id}(id=${category.id})}"><span class="fa fa-edit" aria-hidden="true"></span></a>
+                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm" th:href="@{/categorydelete/{id}(id=${category.id})}"><span class="fa fa-trash" aria-hidden="true"></span></a>
+                </td></tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary btn-md" href="/addcategory">Add a Category</a>
+    </div>
+</div>
+<div th:replace="base :: footer" />
+<div th:replace="base :: scripts" />
+
+</body>
+</html>

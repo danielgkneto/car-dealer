@@ -5,32 +5,67 @@
 <div th:replace="base :: navlinks" />
 <div class="container">
     <div class="jumbotron">
-        <h1 class="text-dark display-3 text-center title">Daniel's Car Posting</h1>
-        <table class="table table-hover text-nowrap table-responsive-xl" th:if="${!cars.isEmpty()}">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Manufacturer</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>MSRP</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="car : ${cars}">
-                    <td style="max-width: 200px" class="text-truncate" th:text="${car.manufacturer}"></td>
-                    <td style="max-width: 200px" class="text-truncate" th:text="${car.model}"></td></td>
-                    <td style="max-width: 180px" class="text-truncate" th:text="${car.year}"></td>
-                    <td style="max-width: 140px" class="text-truncate" th:text="${car.mSRP}"></td>
-                    <td style="max-width: 200px" class="text-truncate" th:text="${car.category.title}"></td></td>
-                    <td>
-                        <a data-toggle="tooltip" title="Details" class="btn btn-info btn-sm" th:href="@{/detail/{id}(id=${car.id})}"><span class="fa fa-eye" aria-hidden="true"></span></a>
-                        <a data-toggle="tooltip" title="Update" class="btn btn-primary btn-sm" th:href="@{/update/{id}(id=${car.id})}"><span class="fa fa-edit" aria-hidden="true"></span></a>
-                        <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${car.id})}"><span class="fa fa-trash" aria-hidden="true"></span></a>
-                    </td></tr>
-            </tbody>
-        </table>
+        <h1 class="text-dark display-3 text-center title">DeLorean's Cars</h1>
+        <h2 class="text-dark display-4 text-center title">Car List</h2>
+        <div class="row justify-content-center">
+            <div class="btn-group col-sm-3 col-md-2 col-lg-1" role="group" aria-label="Categories" th:if="${!categories.isEmpty()}">
+                <a class="btn btn-info btn-md my-3" href="#" th:href="@{/}">All</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="btn-group col-sm-3 col-md-2 col-lg-1" role="group" aria-label="Categories" th:each="category : ${categories}" th:if="${!categories.isEmpty()}">
+                <a class="btn btn-info btn-md my-3" href="#" th:href="@{/pickcategory/{chosencategory} (chosencategory=${category.id})}"><span th:text="${category.title}"></span></a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="card-deck my-4 col-sm-12 col-md-6 col-lg-3" th:each="car : ${cars}" th:if="${!cars.isEmpty()}">
+                <div class="card custom-card" style="max-width: 300px">
+                    <h5 class="card-header text-center"><span th:text="${car.model}"></span> - <span th:text="${car.year}"></span></h5>
+                    <img src="https://res.cloudinary.com/dtudwqsqx/image/upload/c_scale,h_300/v1570799312/BackFuturePhoto3_t1lj4z.jpg" class="card-img-top" alt="a car image">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">US$ <span th:text="${car.mSRP}"></span></h5>
+<!--                        <p class="card-text text-right"><small class="text-muted"><span th:text="${car.category.title}"></span></small></p>-->
+                        <a data-toggle="tooltip" title="See details" class="stretched-link" th:href="@{/detail/{id}(id=${car.id})}"></a>
+<!--                        <a class="btn btn-primary btn-sm" href="/">Back</a>-->
+                    </div>
+<!--
+                    <div class="row card-footer justify-content-center">
+                        <a data-toggle="tooltip" title="Details" class="btn btn-info btn-sm mx-2" th:href="@{/detail/{id}(id=${car.id})}"><span class="fa fa-eye" aria-hidden="true"></span></a>
+                        <a data-toggle="tooltip" title="Update" class="btn btn-primary btn-sm mx-2" href="#" th:href="@{/update/{id}(id=${car.id})}"><span class="fa fa-edit" aria-hidden="true"></span></a>
+                        <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm mx-2" href="#" th:href="@{/delete/{id}(id=${car.id})}"><span class="fa fa-trash" aria-hidden="true"></span></a>
+                    </div>
+-->
+                </div>
+            </div>
+        </div>
+
+        <!--
+                <table class="table table-hover text-nowrap table-responsive-xl" th:if="${!cars.isEmpty()}">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Manufacturer</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>MSRP</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="car : ${cars}">
+                            <td style="max-width: 200px" class="text-truncate" th:text="${car.manufacturer}"></td>
+                            <td style="max-width: 200px" class="text-truncate" th:text="${car.model}"></td></td>
+                            <td style="max-width: 180px" class="text-truncate" th:text="${car.year}"></td>
+                            <td style="max-width: 140px" class="text-truncate" th:text="${car.mSRP}"></td>
+                            <td style="max-width: 200px" class="text-truncate" th:text="${car.category.title}"></td></td>
+                            <td>
+                                <a data-toggle="tooltip" title="Details" class="btn btn-info btn-sm" th:href="@{/detail/{id}(id=${car.id})}"><span class="fa fa-eye" aria-hidden="true"></span></a>
+                                <a data-toggle="tooltip" title="Update" class="btn btn-primary btn-sm" th:href="@{/update/{id}(id=${car.id})}"><span class="fa fa-edit" aria-hidden="true"></span></a>
+                                <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${car.id})}"><span class="fa fa-trash" aria-hidden="true"></span></a>
+                            </td></tr>
+                    </tbody>
+                </table>
+        -->
         <a class="btn btn-primary btn-md" href="/addcar">Add a Car</a>
     </div>
 </div>

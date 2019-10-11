@@ -6,9 +6,9 @@
 <div class="container">
     <div class="jumbotron">
         <h1 class="text-dark display-3 text-center title">Add/Update a Car</h1>
-        <form th:action="@{/processcar}" th:object="${car}" method="post">
+        <br>
+        <form th:action="@{/processcar}" th:object="${car}" method="post" th:if="${!categories.isEmpty()}">
             <input type="hidden" th:field="*{id}" />
-<!--                            <input type="hidden" th:field="*{postedDate}" />-->
             <div class="form-group">
                 <label for="manufacturer">Manufacturer</label>
                 <input class="form-control" id="manufacturer" type="text" placeholder="Manufacturer" th:field="*{manufacturer}" />
@@ -34,6 +34,8 @@
             </div>
             <input class="btn btn-primary btn-md" type="submit" onclick="confirmation()" value="Save">
         </form>
+        <h4 class="text-dark display-5 text-justify" th:if="${categories.isEmpty()}">You need at least one category before adding a car!</h4>
+        <a class="btn btn-primary btn-md" href="/addcategory" th:if="${categories.isEmpty()}">Add a Category</a>
     </div>
 </div>
 <div th:replace="base :: footer" />

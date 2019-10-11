@@ -6,7 +6,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Turret+Road&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title th:fragment="head-title">Daniel's Car Dealer</title>
+    <title th:fragment="head-title">DeLorean's Cars</title>
     <style>
         html {
             position: relative;
@@ -14,7 +14,7 @@
         }
         body {
             margin-bottom: 60px;
-            background: url("https://res.cloudinary.com/dtudwqsqx/image/upload/v1570130724/JOB_pxb2yb.jpg") no-repeat center center fixed;
+            background: url("https://res.cloudinary.com/dtudwqsqx/image/upload/c_scale,w_1920/v1570799312/BackFuturePhoto3_t1lj4z.jpg") no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
@@ -22,7 +22,7 @@
         }
         .jumbotron {
             background: rgb(233, 236, 239); /* This is for ie8 and below */
-            background: rgba(233, 236, 239, 0.5);
+            background: rgba(233, 236, 239, 0.8);
         }
         .title {
             font-family: 'Turret Road', cursive;
@@ -39,6 +39,10 @@
             /*width: 50px;*/
             text-align: center;
             text-decoration: none;
+        }
+
+        .custom-card:hover {
+            opacity: 0.7;
         }
         /* Add a hover effect if you want */
         .fa:hover {
@@ -59,36 +63,34 @@
 </head>
 <body>
 <nav th:fragment="navlinks" class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand title" href="/">Daniel's Car Dealer</a>
+    <a class="navbar-brand title" href="/">DeLorean's Cars</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">Cars</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/categories">Categories</a>
+            </li>
+<!--            <li class="nav-item">
                 <a class="nav-link" href="/addcategory">Add a Category</a>
-            </li>
-            <li class="nav-item">
+            </li>-->
+<!--            <li class="nav-item">
                 <a class="nav-link" href="/addcar">Add a Car</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/f">Magic!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/docs">Docs</a>
-            </li>
+            </li>-->
+
         </ul>
         <form class="form-inline my-2 my-lg-0" th:action="@{/processsearch}" method="post">
             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
 <footer th:fragment="footer" class="footer font-small bg-dark mt-4">
-    <div class="footer-copyright text-center py-3 text-light">2019 - Daniel's Car Dealer (MC Java BootCamp)</div>
+    <div class="footer-copyright text-center py-3 text-light">2019 - DeLorean's Cars (MC Java BootCamp)</div>
 </footer>
 <div th:fragment="scripts">
     <script th:src="@{/js/alerts.js}"></script>

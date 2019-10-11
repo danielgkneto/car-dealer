@@ -8,7 +8,6 @@
         <h1 class="text-dark display-3 text-center title">Add/Update a Category</h1>
         <form th:action="@{/processcategory}" th:object="${category}" method="post">
             <input type="hidden" th:field="*{id}" />
-<!--                            <input type="hidden" th:field="*{postedDate}" />-->
             <div class="form-group">
                 <label for="title">Title</label>
                 <input class="form-control" id="title" type="text" placeholder="Title" th:field="*{title}" />

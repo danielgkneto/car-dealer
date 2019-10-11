@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: header" />
+<body>
+<div th:replace="base :: navlinks" />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-dark display-3 text-center title">Car Details</h1>
+        <div class="card mx-auto" style="max-width: 300px">
+            <h5 class="card-header">MSRP: US$ <span th:text="${car.mSRP}"></span></h5>
+            <img src="https://res.cloudinary.com/dtudwqsqx/image/upload/c_scale,h_300/v1570799312/BackFuturePhoto3_t1lj4z.jpg" class="card-img-top" alt="a car image">
+            <div class="card-body">
+                <p class="card-text text-left">Manufacturer: <span th:text="${car.manufacturer}"></span></p>
+                <p class="card-text text-left">Model: <span th:text="${car.model}"></span></p>
+                <p class="card-text text-left">Year: <span th:text="${car.year}"></span></p>
+                <p class="card-text text-left">Category: <span th:text="${car.category.title}"></span></p>
+                <div class="row card-footer justify-content-center">
+                    <a data-toggle="tooltip" title="Back" class="btn btn-primary btn-sm mx-2" href="#" th:href="@{/}"><span class="fa fa-arrow-left" aria-hidden="true"></span></a>
+                    <a data-toggle="tooltip" title="Update" class="btn btn-primary btn-sm mx-2" href="#" th:href="@{/update/{id}(id=${car.id})}"><span class="fa fa-edit" aria-hidden="true"></span></a>
+                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm mx-2" href="#" th:href="@{/delete/{id}(id=${car.id})}"><span class="fa fa-trash" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="base :: footer" />
+<div th:replace="base :: scripts" />
+
+</body>
+</html>
