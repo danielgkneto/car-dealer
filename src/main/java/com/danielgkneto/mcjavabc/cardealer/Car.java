@@ -14,7 +14,7 @@ public class Car {
     private String model;
     private String year;
     private double mSRP;
-    @OneToOne(fetch=FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="category_id")
     private Category category;
     //TODO image

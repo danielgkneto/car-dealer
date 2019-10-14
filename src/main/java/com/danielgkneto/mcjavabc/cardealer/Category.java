@@ -1,9 +1,7 @@
 package com.danielgkneto.mcjavabc.cardealer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -12,6 +10,8 @@ public class Category {
     private long id;
     private String title;
     private String description;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<Car> cars;
 
     public Category() {
 
