@@ -37,6 +37,16 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/secure")
+    public String admin(){
+        return "secure";
+    }
+
     @RequestMapping("categories")
     public String categoryList(Model model){
         model.addAttribute("categories", categoryRepository.findAll());
