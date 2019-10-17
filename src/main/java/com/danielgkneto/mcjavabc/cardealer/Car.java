@@ -17,17 +17,21 @@ public class Car {
     @ManyToOne()
     @JoinColumn(name="category_id")
     private Category category;
+    @ManyToOne()
+    @JoinColumn(name="user_id")
+    private User user;
     //TODO image
 
     public Car() {
     }
 
-    public Car(String manufacturer, String model, String year, double mSRP, Category category) {
+    public Car(String manufacturer, String model, String year, double mSRP, Category category, User user) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.year = year;
         this.mSRP = mSRP;
         this.category = category;
+        this.user = user;
     }
 
     public long getId() {
@@ -76,5 +80,13 @@ public class Car {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

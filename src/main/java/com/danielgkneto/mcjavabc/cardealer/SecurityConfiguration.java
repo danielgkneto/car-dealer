@@ -35,14 +35,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/", "/h2-console/**").permitAll()
+                .antMatchers("/", "/login", "/userprofile", "/h2-console/**", "/register", "/categories", "/detail/*", "/processsearch", "/pickcategory/*").permitAll()
+                .antMatchers("/addcar", "/addcategory", "/processcar", "/processcategory", "/update/*", "/delete/*", "/categoryupdate/*", "/categorydelete/*").access("hasAnyAuthority('USER', 'ADMIN')")
                 .antMatchers("/admin").access("hasAuthority('ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login").permitAll()
+                /*.logoutSuccessUrl("/login?logout")*/.permitAll()
                 .and().httpBasic();
         http.csrf().disable();
         http.headers().frameOptions().disable();

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:pth="http://www.w3.org/1999/html">>
 <head th:replace="base :: header" />
 <body>
 <div th:replace="base :: navlinks" />
@@ -7,6 +8,9 @@
     <div class="jumbotron">
         <h1 class="text-dark display-3 text-center title">DeLorean's Cars</h1>
         <h2 class="text-dark text-center title">Secure!</h2>
+        <p>Email: <span th:text="${user.email}"></span></p>
+        <p>Last Name: <span th:text="${user.lastName}"></span></p>
+        <a class="btn btn-primary btn-md" href="/logout">Logout</a>
     </div>
 </div>
 <div th:replace="base :: footer" />

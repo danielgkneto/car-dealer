@@ -3,8 +3,11 @@ package com.danielgkneto.mcjavabc.cardealer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,21 +16,38 @@ import java.util.Set;
 @Controller
 public class HomeController {
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     CarRepository carRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    UserService userService;
 
-    @RequestMapping("/f")
-    public String fillTable() {
-// TODO fill database
+    @GetMapping("/register")
+    public String showRegistrationPage(Model model) {
+        model.addAttribute("user", new User());
+        return "registration";
+    }
 
-        Category[] fakeCategories = new Category[] {new Category("Sedan", "A sedan is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl."), new Category("SUV", "A SUV is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl."), new Category("Mini", "A mini car is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl."), new Category("Sport", "A sport car is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl.")};
-        categoryRepository.saveAll(Arrays.asList(fakeCategories));
-
-        Car[] fakeCars = new Car[] {new Car("Toyota","Corolla","2010",11000, fakeCategories[0]), new Car("Ford","Mustang","2018",88000, fakeCategories[3]), new Car("Volkswagen","Beatle","1966",500, fakeCategories[2]), new Car("Erat Volutpat Company","Debra","7399",34925, fakeCategories[1]), new Car("Back to the Future","DeLorean","2000",100000, fakeCategories[3])};
-        carRepository.saveAll(Arrays.asList(fakeCars));
-
+    @PostMapping("/register")
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+        model.addAttribute("user", user);
+        if (result.hasErrors()) {
+            return "registration";
+        }
+        else {
+            userService.saveUser(user);
+            model.addAttribute("message", "User Account Created.");
+        }
         return "redirect:/";
+    }
+
+    @RequestMapping("/secure")
+    public String secure(Principal principal, Model model) {
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        return "secure";
     }
 
     @RequestMapping("/")
@@ -42,11 +62,6 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/secure")
-    public String admin(){
-        return "secure";
-    }
-
     @RequestMapping("categories")
     public String categoryList(Model model){
         model.addAttribute("categories", categoryRepository.findAll());
@@ -59,8 +74,10 @@ public class HomeController {
     }*/
 
     @GetMapping("/addcar")
-    public String addCar(Model model){
-        model.addAttribute("car", new Car());
+    public String addCar(Principal principal, Model model){
+        Car car = new Car();
+        car.setUser(userRepository.findByUsername(principal.getName()));
+        model.addAttribute("car", car);
         model.addAttribute("categories", categoryRepository.findAll());
         return "carform";
     }
@@ -141,4 +158,12 @@ public class HomeController {
         model.addAttribute("categories", categoryRepository.findAll());
         return "index";
     }
+
+    @GetMapping("/userprofile")
+    public String showProfile(Principal principal, Model model) {
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        return "userprofile";
+    }
+
 }

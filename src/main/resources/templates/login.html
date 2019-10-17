@@ -7,11 +7,11 @@
     <div class="jumbotron">
         <h1 class="text-dark display-3 text-center title">DeLorean's Cars</h1>
         <h2 class="text-dark display-4 text-center title">Login</h2>
-        <div th:if="${param.error}">
+        <div class="alert alert-error" th:if="${param.error}">
             Invalid username or password
         </div>
 
-        <div th:if="${param.logout}">
+        <div class="alert alert-success" th:if="${param.logout}">
             You have been logged out
         </div>
 

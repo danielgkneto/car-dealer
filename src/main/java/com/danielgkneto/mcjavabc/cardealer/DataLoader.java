@@ -11,13 +11,17 @@ import java.util.Arrays;
 @Component
 public class DataLoader implements CommandLineRunner {
     @Autowired
+    CarRepository carRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
     UserRepository userRepository;
-
     @Autowired
     RoleRepository roleRepository;
 
     @Override
-    public void run(String... strings) throws Exception{
+    public void run(String... strings) throws Exception {
+
         roleRepository.save(new Role("USER"));
         roleRepository.save(new Role("ADMIN"));
 
@@ -29,9 +33,15 @@ public class DataLoader implements CommandLineRunner {
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
+        Category[] fakeCategories = new Category[] {new Category("Sedan", "A sedan is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl."), new Category("SUV", "A SUV is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl."), new Category("Mini", "A mini car is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl."), new Category("Sport", "A sport car is a jksldjsklajdklsajdlasjdjasldjsaljdlasjdsajldjasl.")};
+        categoryRepository.saveAll(Arrays.asList(fakeCategories));
+
+        Car[] fakeCars = new Car[] {new Car("Toyota","Corolla","2010",11000, fakeCategories[0], user), new Car("Ford","Mustang","2018",88000, fakeCategories[3], user), new Car("Volkswagen","Beatle","1966",500, fakeCategories[2], user), new Car("Erat Volutpat Company","Debra","7399",34925, fakeCategories[1], user), new Car("Back to the Future","DeLorean","2000",100000, fakeCategories[3], user)};
+        carRepository.saveAll(Arrays.asList(fakeCars));
+
         user = new User("admin@admin.com", "password",
                 "Admin",
-                "User", true,
+                "Admin", true,
                 "admin");
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
