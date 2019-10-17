@@ -74,10 +74,8 @@ public class HomeController {
     }*/
 
     @GetMapping("/addcar")
-    public String addCar(Principal principal, Model model){
-        Car car = new Car();
-        car.setUser(userRepository.findByUsername(principal.getName()));
-        model.addAttribute("car", car);
+    public String addCar(Model model){
+        model.addAttribute("car", new Car());
         model.addAttribute("categories", categoryRepository.findAll());
         return "carform";
     }
@@ -89,7 +87,8 @@ public class HomeController {
     }
 
     @PostMapping("/processcar")
-    public String saveCar(@ModelAttribute Car car){
+    public String saveCar(@ModelAttribute Car car, Principal principal){
+        car.setUser(userRepository.findByUsername(principal.getName()));
         carRepository.save(car);
         return "redirect:/";
     }
